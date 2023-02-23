@@ -12,12 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->string('name');
-            $table->string('username');
-            $table->longText('password');
+            $table->foreignIdFor(User::class)->constrained();
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('tags');
     }
 };

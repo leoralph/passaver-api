@@ -7,21 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Account extends Model
+class Tag extends Model
 {
     use HasFactory;
 
-    public $casts = [
-        'password' => 'encrypted',
-    ];
+    public function accounts(): BelongsToMany
+    {
+        return $this->belongsToMany(Account::class);
+    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function tags(): BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\User;
+use App\Models\Account;
+use App\Models\Tag;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,12 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('account_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->string('name');
-            $table->string('username');
-            $table->longText('password');
+            $table->foreignIdFor(Account::class);
+            $table->foreignIdFor(Tag::class);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('account_tag');
     }
 };
